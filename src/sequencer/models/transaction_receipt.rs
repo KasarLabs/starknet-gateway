@@ -1,4 +1,4 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use serde_with::serde_as;
 use starknet_core::{
     serde::unsigned_field_element::{UfeHex, UfePendingBlockHash},
@@ -38,7 +38,7 @@ pub struct Receipt {
 }
 
 #[serde_as]
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[cfg_attr(feature = "no_unknown_fields", serde(deny_unknown_fields))]
 pub struct ConfirmedReceipt {
     #[serde_as(as = "UfeHex")]
@@ -59,7 +59,7 @@ pub struct ConfirmedReceipt {
     pub actual_fee: FieldElement,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Deserialize, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 #[cfg_attr(feature = "no_unknown_fields", serde(deny_unknown_fields))]
 pub enum TransactionStatus {
@@ -79,7 +79,7 @@ pub enum TransactionStatus {
     AcceptedOnL1,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Deserialize, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 #[cfg_attr(feature = "no_unknown_fields", serde(deny_unknown_fields))]
 pub enum TransactionExecutionStatus {
@@ -88,7 +88,7 @@ pub enum TransactionExecutionStatus {
     Rejected,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Deserialize, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 #[cfg_attr(feature = "no_unknown_fields", serde(deny_unknown_fields))]
 pub enum TransactionFinalityStatus {
@@ -98,7 +98,7 @@ pub enum TransactionFinalityStatus {
     AcceptedOnL1,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[cfg_attr(feature = "no_unknown_fields", serde(deny_unknown_fields))]
 pub struct ExecutionResources {
     pub n_steps: u64,
@@ -106,7 +106,7 @@ pub struct ExecutionResources {
     pub builtin_instance_counter: BuiltinInstanceCounter,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[cfg_attr(feature = "no_unknown_fields", serde(deny_unknown_fields))]
 pub struct BuiltinInstanceCounter {
     pub pedersen_builtin: Option<u64>,
@@ -118,7 +118,7 @@ pub struct BuiltinInstanceCounter {
 }
 
 #[serde_as]
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[cfg_attr(feature = "no_unknown_fields", serde(deny_unknown_fields))]
 pub struct L1ToL2Message {
     pub from_address: L1Address,
@@ -133,7 +133,7 @@ pub struct L1ToL2Message {
 }
 
 #[serde_as]
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[cfg_attr(feature = "no_unknown_fields", serde(deny_unknown_fields))]
 pub struct L2ToL1Message {
     #[serde_as(as = "UfeHex")]
@@ -144,7 +144,7 @@ pub struct L2ToL1Message {
 }
 
 #[serde_as]
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[cfg_attr(feature = "no_unknown_fields", serde(deny_unknown_fields))]
 pub struct Event {
     #[serde_as(as = "UfeHex")]
